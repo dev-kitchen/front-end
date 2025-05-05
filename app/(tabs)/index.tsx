@@ -1,12 +1,94 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
-
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as AuthSession from 'expo-auth-session';
+import * as WebBrowser from 'expo-web-browser';
+import * as React from "react";
+import { useEffect } from 'react';
+import { Button, Image, Linking, Platform, StyleSheet, Text } from 'react-native';
+
+
+
+
+
 
 export default function HomeScreen() {
+
+  const [userInfo, setUserInfo] = React.useState(null);
+
+
+
+  // 토큰을 이용하여 유저 정보를 가져오는 함수
+  const getUserInfo = async (token) => {
+    if (!token) return;
+    try {
+      const response = await fetch(
+        "https://www.googleapis.com/oauth2/v3/userinfo",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      const userInfoResponse = await response.json();
+      // 유저 정보를 AsyncStorage에 저장, 상태업뎃
+      await AsyncStorage.setItem("@user", JSON.stringify(userInfoResponse));
+      setUserInfo(userInfoResponse);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const handleLogout = async () => {
+    await AsyncStorage.removeItem("@user");
+    setUserInfo(null);
+  };
+
+
+  const handleLogin = async () => {
+    const authUrl = "https://eat.r-e.kr/api/auth/oauth2/google";
+
+    const result = await WebBrowser.openAuthSessionAsync(authUrl, AuthSession.makeRedirectUri(), {
+      showInRecents: true,
+    });
+
+    if (result.type === 'success') {
+      console.log("로그인 완료!", result.url);
+      // result.url → 리디렉션된 URL
+      // 여기에 토큰 처리 등 추가 로직
+    } else {
+      console.log("로그인 취소 또는 실패");
+    }
+  };
+
+  useEffect(() => {
+    // URL이 변경될 때 처리
+    const handleUrl = (url: string) => {
+      if (url.includes('devKitchen://oauthredirect')) {
+        // URL에서 파라미터 추출
+        const params = new URLSearchParams(url.split('?')[1]);
+        const accessToken = params.get('access_token');
+        const refreshToken = params.get('refresh_token');
+  
+        // 받은 토큰을 처리합니다.
+        console.log('Access Token:', accessToken);
+        console.log('Refresh Token:', refreshToken);
+      }
+    };
+  
+    // 이벤트 리스너 추가
+    const subscription = Linking.addEventListener('url', (event) => handleUrl(event.url));
+  
+    // 앱이 백그라운드에서 열렸을 때 URL 처리
+    Linking.getInitialURL().then((url) => {
+      if (url) handleUrl(url);
+    });
+  
+    return () => {
+      // 이벤트 리스너 제거
+      subscription.remove();
+    };
+  }, []);
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
@@ -16,12 +98,12 @@ export default function HomeScreen() {
           style={styles.reactLogo}
         />
       }>
+        <Text>{JSON.stringify(userInfo, null, 2)}</Text>
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
         <HelloWave />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
+        <ThemedText type="subtitle">Step 1: Try itasdfasdfa111111</ThemedText>
         <ThemedText>
           Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
           Press{' '}
@@ -29,7 +111,7 @@ export default function HomeScreen() {
             {Platform.select({
               ios: 'cmd + d',
               android: 'cmd + m',
-              web: 'F12',
+              web: 'F12'
             })}
           </ThemedText>{' '}
           to open developer tools.
@@ -38,19 +120,20 @@ export default function HomeScreen() {
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 2: Explore</ThemedText>
         <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
+          Tap the Explore tab to learn more about what's included in this starter app.
         </ThemedText>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
         <ThemedText>
-          {`When you're ready, run `}
+          When you're ready, run{' '}
           <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
           <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
           <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
           <ThemedText type="defaultSemiBold">app-example</ThemedText>.
         </ThemedText>
       </ThemedView>
+      <Button title="구글 로그인" onPress={handleLogin} />
     </ParallaxScrollView>
   );
 }

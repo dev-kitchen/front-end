@@ -16,7 +16,8 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.leesuyoen.devKitchen"
     },
     "web": {
       "bundler": "metro",
@@ -33,10 +34,18 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
-      ]
+      ],
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "owner": "leesuyoen",
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "9ea47403-ffa8-4b8e-a761-704f3da995f9"
+      }
     }
   }
 }
