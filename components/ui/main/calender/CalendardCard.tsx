@@ -1,4 +1,5 @@
 import { MaterialIcons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import React, { ReactNode } from "react";
 import styled from "styled-components/native";
 
@@ -14,7 +15,7 @@ const Container = styled.View`
   shadow-opacity: 0.1;
   shadow-radius: 4px;
   elevation: 3;
-  width:100%;
+  width: 100%;
   min-height: 135px;
 `;
 
@@ -40,8 +41,9 @@ const GreetingText = styled.Text`
   font-size: 16px;
   font-weight: bold;
 `;
-
+const IconButton = styled.TouchableOpacity``;
 export default function CalendarCard({ children }: CalendarCardProps) {
+  const router = useRouter();
   return (
     <Container>
       <Header>
@@ -49,7 +51,9 @@ export default function CalendarCard({ children }: CalendarCardProps) {
           <Avatar source={require("@/assets/images/calendar-avatar.png")} />
           <GreetingText>재연아,{"\n"}오늘 밥 먹었어?</GreetingText>
         </ProfileWrapper>
-        <MaterialIcons name="calendar-today" size={24} color="#333" />
+        <IconButton onPress={() => router.push("/record")}>
+          <MaterialIcons name="calendar-today" size={24} color="#333" />
+        </IconButton>
       </Header>
       {children}
     </Container>
