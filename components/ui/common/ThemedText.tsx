@@ -58,3 +58,4 @@ const styles = StyleSheet.create({
     color: '#0a7ea4',
   },
 });
+// ThemedText: 다크/라이트 테마 대응 텍스트 컴포넌트

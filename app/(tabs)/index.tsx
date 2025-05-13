@@ -1,22 +1,19 @@
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import ParallaxScrollView from "@/components/ui/common/ParallaxScrollView";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as AuthSession from 'expo-auth-session';
+import Constants from "expo-constants";
 import * as WebBrowser from 'expo-web-browser';
 import * as React from "react";
 import { useEffect } from 'react';
-import { Button, Image, Linking, Platform, StyleSheet, Text } from 'react-native';
+import { Button, Image, Linking, StyleSheet } from 'react-native';
 
 
-
+export const API_BASE_URL = Constants.expoConfig?.extra?.API_URL;
 
 
 
 export default function HomeScreen() {
-
-  const [userInfo, setUserInfo] = React.useState(null);
+const [userInfo, setUserInfo] = React.useState(null);
 
 
 
@@ -46,7 +43,8 @@ export default function HomeScreen() {
 
 
   const handleLogin = async () => {
-    const authUrl = "https://eat.r-e.kr/api/auth/oauth2/google";
+ const authUrl = `${API_BASE_URL}auth/oauth2/google`;
+
 
     const result = await WebBrowser.openAuthSessionAsync(authUrl, AuthSession.makeRedirectUri(), {
       showInRecents: true,
@@ -97,42 +95,7 @@ export default function HomeScreen() {
           source={require('@/assets/images/partial-react-logo.png')}
           style={styles.reactLogo}
         />
-      }>
-        <Text>{JSON.stringify(userInfo, null, 2)}</Text>
-      <ThemedView style={styles.titleContainer}>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try itasdfasdfa111111</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
+      }>      
       <Button title="구글 로그인" onPress={handleLogin} />
     </ParallaxScrollView>
   );

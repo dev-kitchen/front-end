@@ -16,3 +16,4 @@ export function HapticTab(props: BottomTabBarButtonProps) {
     />
   );
 }
+//  하단 탭 바(Tab Bar) 버튼에 iOS 한정으로 탭 진동(Haptic Feedback)을 추가하는 컴포넌트입니다.

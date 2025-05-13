@@ -1,7 +1,7 @@
 // Fallback for using MaterialIcons on Android and web.
 
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { SymbolWeight, SymbolViewProps } from 'expo-symbols';
+import { SymbolViewProps, SymbolWeight } from 'expo-symbols';
 import { ComponentProps } from 'react';
 import { OpaqueColorValue, type StyleProp, type TextStyle } from 'react-native';
 
@@ -39,3 +39,8 @@ export function IconSymbol({
 }) {
   return <MaterialIcons color={color} size={size} name={MAPPING[name]} style={style} />;
 }
+// iOS 전용 아이콘 시스템인 SF Symbols를 사용하는 앱에서, Android 및 Web 환경에서도 동일한 아이콘을 보여주기 위한 fallback(대체) 아이콘 컴포넌트입니다.
+
+// 즉, iOS에선 SF Symbols,
+// Android/Web에선 Material Icons를 사용해서
+// 모든 플랫폼에서 비슷한 아이콘 경험을 제공하기 위한 구조

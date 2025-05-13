@@ -7,8 +7,8 @@ import Animated, {
   useScrollViewOffset,
 } from 'react-native-reanimated';
 
-import { ThemedView } from '@/components/ThemedView';
-import { useBottomTabOverflow } from '@/components/ui/TabBarBackground';
+import { ThemedView } from '@/components/ui/common/ThemedView';
+import { useBottomTabOverflow } from '@/components/ui/ios/TabBarBackground';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
 const HEADER_HEIGHT = 250;
@@ -80,3 +80,4 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
 });
+// 스크롤 시 헤더 이미지에 패럴럭스 효과
