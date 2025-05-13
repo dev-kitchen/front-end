@@ -4,11 +4,10 @@ import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 
 export default function OAuthRedirect() {
   const router = useRouter();
-//   const { access_token } = useSearchParams();
 
   useEffect(() => {
 
-      
+      console.log("test")
       // ✅ 토큰 처리 후 홈 화면으로 이동
       router.replace('/');
     

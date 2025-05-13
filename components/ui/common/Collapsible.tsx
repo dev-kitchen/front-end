@@ -1,10 +1,10 @@
 import { PropsWithChildren, useState } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import { Colors } from '@/constants/Colors';
+import { ThemedText } from '@/components/ui/common/ThemedText';
+import { ThemedView } from '@/components/ui/common/ThemedView';
+import { IconSymbol } from '@/components/ui/ios/IconSymbol';
+import { Colors } from '@/constants/styles/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
 export function Collapsible({ children, title }: PropsWithChildren & { title: string }) {
@@ -43,3 +43,5 @@ const styles = StyleSheet.create({
     marginLeft: 24,
   },
 });
+
+// Collapsible 컴포넌트는 제목(title)을 눌렀을 때 아래 내용(children)을 펼치거나 접는 기능을 하는, 흔히 말하는 **"아코디언 UI 컴포넌트"*

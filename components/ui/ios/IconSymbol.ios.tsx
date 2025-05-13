@@ -30,3 +30,5 @@ export function IconSymbol({
     />
   );
 }
+//  iOS에서 사용할 수 있는 SF Symbols 기반 아이콘 컴포넌트입니다.
+// Expo의 expo-symbols를 사용해서, iOS 전용 SymbolView를 간편하게 활용할 수 있도록 IconSymbol이라는 래퍼 컴포넌트
