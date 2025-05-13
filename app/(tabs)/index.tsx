@@ -1,4 +1,5 @@
 import ParallaxScrollView from "@/components/ui/common/ParallaxScrollView";
+import CalendarScreen from "@/components/ui/main/calender/CalendarScreen";
 import { parseQueryParams } from "@/lib/auth/auth";
 import { useUserStore } from "@/store/userStore";
 import * as AuthSession from "expo-auth-session";
@@ -6,6 +7,8 @@ import Constants from "expo-constants";
 import * as WebBrowser from "expo-web-browser";
 import * as React from "react";
 import { Button, Image, StyleSheet } from "react-native";
+
+
 
 export const API_BASE_URL = Constants.expoConfig?.extra?.API_URL;
 
@@ -51,6 +54,7 @@ export default function HomeScreen() {
         />
       }
     >
+      <CalendarScreen></CalendarScreen>
       <Button title="구글 로그인" onPress={handleLogin} />
     </ParallaxScrollView>
   );
