@@ -9,14 +9,13 @@ type CalendarCardProps = {
 const Container = styled.View`
   background-color: #fffaf4;
   border-radius: 12px;
-  padding: 16px;
-  margin: 16px;
+  padding: 22px 10px;
   shadow-color: #000;
   shadow-opacity: 0.1;
   shadow-radius: 4px;
   elevation: 3;
-  width:300px;
-  height: 300px;
+  width:100%;
+  min-height: 135px;
 `;
 
 const Header = styled.View`

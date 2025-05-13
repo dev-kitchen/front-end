@@ -1,6 +1,6 @@
 import ParallaxScrollView from "@/components/ui/common/ParallaxScrollView";
 import CalendarScreen from "@/components/ui/main/calender/CalendarScreen";
-import { parseQueryParams } from "@/lib/auth/auth";
+import { parseQueryParams } from "@/lib/auth";
 import { useUserStore } from "@/store/userStore";
 import * as AuthSession from "expo-auth-session";
 import Constants from "expo-constants";

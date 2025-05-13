@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import Calendar from './Calender';
+import CalendarPanel from './Calender';
 
 
 const ScreenContainer = styled.SafeAreaView`
@@ -12,7 +12,7 @@ const ScreenContainer = styled.SafeAreaView`
 export default function CalendarScreen() {
   return (
     <ScreenContainer>
-      <Calendar />
+      <CalendarPanel />
     </ScreenContainer>
   );
 }
