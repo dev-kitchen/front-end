@@ -6,8 +6,6 @@ export default function OAuthRedirect() {
   const router = useRouter();
 
   useEffect(() => {
-
-      console.log("test")
       // ✅ 토큰 처리 후 홈 화면으로 이동
       router.replace('/');
     
